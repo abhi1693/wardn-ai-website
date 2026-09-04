@@ -2,7 +2,16 @@ import type { Metadata, Viewport } from "next";
 import { DM_Mono, Manrope } from "next/font/google";
 import type { ReactNode } from "react";
 
+import { DeferredGoogleAnalytics } from "@/components/analytics/deferred-google-analytics";
+
 import "./globals.css";
+
+const defaultGoogleAnalyticsId = "G-TB10XGBRDT";
+
+function googleAnalyticsId() {
+  if (process.env.NODE_ENV !== "production") return "";
+  return process.env.GOOGLE_ANALYTICS_ID?.trim() || defaultGoogleAnalyticsId;
+}
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -43,9 +52,14 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  const gaId = googleAnalyticsId();
+
   return (
     <html lang="en" className={`${manrope.variable} ${dmMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        {gaId ? <DeferredGoogleAnalytics gaId={gaId} /> : null}
+      </body>
     </html>
   );
 }

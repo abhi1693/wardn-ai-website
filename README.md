@@ -28,6 +28,10 @@ npm run build
 
 The Next.js build produces a standalone production server.
 
+Google Analytics is enabled only in production. It defaults to measurement ID
+`G-TB10XGBRDT`, can be overridden at build time with `GOOGLE_ANALYTICS_ID`, and
+defers loading until the first interaction or page exit.
+
 ## Container image
 
 Published releases build a Linux/ARM64 image at
