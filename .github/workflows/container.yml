@@ -1,0 +1,40 @@
+name: Container Image
+
+on:
+  push:
+    branches:
+      - master
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Semver image version without a leading v
+        required: true
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    name: Build linux/arm64
+    uses: abhi1693/actions/.github/workflows/docker-build-push.yml@master
+    with:
+      runs-on: ubuntu-24.04-arm
+      image: ghcr.io/${{ github.repository }}
+      context: .
+      file: Dockerfile
+      platforms: linux/arm64
+      cache-scope: wardn-ai-website-arm64
+      build-args: |
+        APP_VERSION=${{ github.event.release.tag_name || inputs.version || format('0.0.0+{0}', github.sha) }}
+      tags: |
+        type=semver,pattern={{version}}
+        type=raw,value=${{ inputs.version }},enable=${{ github.event_name == 'workflow_dispatch' }}
+        type=raw,value=${{ github.sha }}
+      labels: |
+        org.opencontainers.image.source=https://github.com/${{ github.repository }}
+        org.opencontainers.image.title=wardn-ai-website
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
