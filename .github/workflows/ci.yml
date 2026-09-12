@@ -28,7 +28,7 @@ jobs:
     uses: abhi1693/actions/.github/workflows/container-images.yml@v1
     with:
       manifest: .github/images.json
-      publish: ${{ github.event_name != 'pull_request' && github.actor != 'dependabot[bot]' }}
+      publish: ${{ github.repository == 'abhi1693/wardn-ai-website' && github.event_name != 'pull_request' && github.actor != 'dependabot[bot]' }}
       version: ${{ inputs.version }}
     permissions:
       contents: read
