@@ -1,33 +1,42 @@
 name: CI
-
 on:
-  pull_request:
+  pull_request: null
   push:
     branches:
       - master
-
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Semver image version without a leading v
+        required: true
 permissions:
   contents: read
-
 jobs:
   verify:
+    uses: abhi1693/actions/.github/workflows/node-ci.yml@34e92ba1eee6a47e9b10f13e2180114fc01b6027
+    with:
+      checks: '["lint", "build"]'
+      scripts: '{"lint": "lint", "build": "build"}'
+      timeout-minutes: 20
+      runs-on: ubuntu-latest
+      node-version: '22'
     name: Lint and build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Build
-        run: npm run build
+  images:
+    uses: abhi1693/actions/.github/workflows/container-images.yml@34e92ba1eee6a47e9b10f13e2180114fc01b6027
+    with:
+      manifest: .github/images.json
+      publish: ${{ github.event_name != 'pull_request' && github.actor != 'dependabot[bot]' }}
+      version: ${{ inputs.version }}
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+      attestations: write
+    needs:
+      - verify
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
