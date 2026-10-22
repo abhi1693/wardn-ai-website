@@ -37,3 +37,10 @@ defers loading until the first interaction or page exit.
 Published releases build a Linux/ARM64 image at
 `ghcr.io/abhi1693/wardn-ai-website`. Like the other Wardn frontends, the image
 runs the Next.js standalone server as an unprivileged Node user on port `3000`.
+
+## Next patch release
+
+Version 0.1.2 is prepared in [the changelog](CHANGELOG.md). Dependency updates
+include the complete package locks and the tested local brace-depth security fix.
+Use Node.js 26.12.1 for frontend/CLI checks. ESLint 9 and TypeScript 6 remain at
+the latest versions supported by the current lint plugins.

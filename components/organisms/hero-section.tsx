@@ -1,5 +1,6 @@
-import { Check, Github, MessageSquare, ShieldCheck, Wrench } from "lucide-react";
+import { Check, MessageSquare, ShieldCheck, Wrench } from "lucide-react";
 
+import { GithubIcon } from "@/components/atoms/github-icon";
 import { BrandMark } from "@/components/atoms/brand-mark";
 import { Reveal } from "@/components/atoms/reveal";
 import { Button } from "@/components/ui/button";
@@ -62,7 +63,7 @@ export function HeroSection() {
         <p className="hero-lede">Wardn is the control plane for governed AI tool access—one place to approve MCP servers, protect credentials, run agents, and account for every action.</p>
         <div className="hero-actions">
           <Button asChild><a href="https://github.com/abhi1693/wardn-ai#local-development" target="_blank" rel="noreferrer">Start self-hosting <span aria-hidden="true">↗</span></a></Button>
-          <Button asChild variant="ghost"><a href="https://github.com/abhi1693/wardn-ai" target="_blank" rel="noreferrer"><Github /> Explore the source</a></Button>
+          <Button asChild variant="ghost"><a href="https://github.com/abhi1693/wardn-ai" target="_blank" rel="noreferrer"><GithubIcon /> Explore the source</a></Button>
         </div>
         <p className="hero-note"><span>Built for</span> platform engineering, security, and AI teams</p>
       </Reveal>

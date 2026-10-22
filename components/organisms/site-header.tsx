@@ -1,8 +1,8 @@
 "use client";
 
-import { Github } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+import { GithubIcon } from "@/components/atoms/github-icon";
 import { Brand } from "@/components/atoms/brand";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -119,7 +119,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="nav-actions">
-          <a className="nav-github" href="https://github.com/abhi1693/wardn-ai" target="_blank" rel="noreferrer" aria-label="Wardn AI on GitHub"><Github /></a>
+          <a className="nav-github" href="https://github.com/abhi1693/wardn-ai" target="_blank" rel="noreferrer" aria-label="Wardn AI on GitHub"><GithubIcon /></a>
           <Button asChild variant="light" size="sm">
             <a href="https://github.com/abhi1693/wardn-ai#local-development" target="_blank" rel="noreferrer">Self-host Wardn <span aria-hidden="true">↗</span></a>
           </Button>
