@@ -18,8 +18,8 @@ jobs:
   verify:
     uses: abhi1693/actions/.github/workflows/node-ci.yml@v1
     with:
-      checks: '["lint", "dependency-security", "build"]'
-      scripts: '{"lint": "lint", "dependency-security": "test:dependency-security", "build": "build"}'
+      checks: '["lint", "test", "build"]'
+      scripts: '{"lint": "lint", "test": "test:dependency-security", "build": "build"}'
       timeout-minutes: 20
       runs-on: ubuntu-latest
       node-version: '26'
