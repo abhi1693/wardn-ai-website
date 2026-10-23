@@ -18,16 +18,17 @@ jobs:
   verify:
     uses: abhi1693/actions/.github/workflows/node-ci.yml@v1
     with:
-      checks: '["lint", "build"]'
-      scripts: '{"lint": "lint", "build": "build"}'
+      checks: '["lint", "test", "build"]'
+      scripts: '{"lint": "lint", "test": "test:dependency-security", "build": "build"}'
       timeout-minutes: 20
       runs-on: ubuntu-latest
-      node-version: '22'
+      node-version: '26.12.1'
     name: Lint and build
   images:
     uses: abhi1693/actions/.github/workflows/container-images.yml@v1
     with:
       manifest: .github/images.json
+      version-file: package.json
       publish: ${{ github.repository == 'abhi1693/wardn-ai-website' && github.event_name != 'pull_request' && github.actor != 'dependabot[bot]' }}
       version: ${{ inputs.version }}
     permissions:
