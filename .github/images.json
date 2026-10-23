@@ -9,6 +9,7 @@
       "platforms": [
         "linux/arm64"
       ],
+      "smoke-script": "scripts/runtime-smoke.sh",
       "build-args": {
         "APP_VERSION": "{version}"
       }

@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.2 (release preparation)
+## 0.1.2
 
 - Update all runtime, development and optional package manifests and regenerate
   their transitive lockfiles from current package registries.
@@ -11,9 +11,6 @@
   requires TypeScript below 6.1. These are explicit compatibility limits.
 - Reuse the tested, licensed local braces depth fix for CVE-2026-93687 until an
   upstream fixed release exists; include dependency security regression tests.
-
-This change prepares the next patch release. Tags, releases, image publication
-and deployment require the subsequent release workflow.
 
 Lucide 1.x removes brand icons. Retain the existing GitHub icon locally with its
 upstream ISC license so the site keeps its source links and appearance.
